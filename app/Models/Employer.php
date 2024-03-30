@@ -5,19 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Job extends Model
+class Employer extends Model
 {
     use HasFactory;
 
-    protected $table = 'job_listings';
-
     protected $fillable = [
-        'title',
-        'salary',
+        'name',
     ];
 
-    public function employer()
+    public function jobs()
     {
-        return $this->belongsTo(Employer::class);
+        return $this->hasMany(Job::class);
     }
 }
