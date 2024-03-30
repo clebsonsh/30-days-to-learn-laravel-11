@@ -7,7 +7,7 @@ Route::get('/', fn () => view('home'))->name('home');
 
 Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' => Job::all(),
+        'jobs' => Job::with('employer')->get(),
     ]);
 })->name('jobs');
 

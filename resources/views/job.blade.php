@@ -1,6 +1,6 @@
 <x-layout title="Jobs">
-    <h2 class="font-bold text-lg">{{ $job['title'] }}</h2>
+    <h2 class="font-bold text-lg">{{ $job->title }}</h2>
     <p>
-        This job ays {{ $job['salary'] }} per year.
+        This job pays: {{ $job->salay_formatted }}
     </p>
 </x-layout>

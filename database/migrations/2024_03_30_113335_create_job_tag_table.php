@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(Job::class, 'job_listing_id')->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
+
+            $table->unique(['job_listing_id', 'tag_id']);
         });
     }
 
