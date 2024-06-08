@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Number;
 
 class Job extends Model
@@ -26,13 +28,13 @@ class Job extends Model
         return Number::currency((int)$this->salary, 'USD') . ' USD per year';
     }
 
-    public function employer()
+    public function employer(): BelongsTo
     {
         return $this->belongsTo(Employer::class);
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class,  foreignPivotKey: 'job_listing_id')->withTimestamps();
+        return $this->belongsToMany(Tag::class, foreignPivotKey: 'job_listing_id')->withTimestamps();
     }
 }
