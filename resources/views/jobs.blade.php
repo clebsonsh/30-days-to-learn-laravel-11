@@ -7,7 +7,7 @@
                     {{ $job->employer->name }}
                 </div>
                 <div>
-                    <strong>{{ $job->title }} pays:</strong> {{ $job->salay_formatted }}
+                    <strong>{{ $job->title }} pays:</strong> {{ $job->formatted_salary }}
                 </div>
             </a>
         @endforeach

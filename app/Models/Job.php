@@ -18,12 +18,12 @@ class Job extends Model
     ];
 
     protected $appends = [
-        'salay_formatted',
+        'formatted_salary',
     ];
 
-    public function getSalayFormattedAttribute()
+    public function getFormattedSalaryAttribute(): string
     {
-        return Number::currency((int) $this->salary, 'USD') . ' USD per year';
+        return Number::currency((int)$this->salary, 'USD') . ' USD per year';
     }
 
     public function employer()
