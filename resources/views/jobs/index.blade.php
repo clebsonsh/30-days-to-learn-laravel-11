@@ -1,4 +1,4 @@
-<x-layout title="Jobs Listing">
+<x-layout title="Jobs Listing" showCreateJob="true">
     <div class="space-y-4">
         {{ $jobs->links() }}
         @foreach ($jobs as $job)

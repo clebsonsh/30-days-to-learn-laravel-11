@@ -22,7 +22,10 @@ Route::prefix('jobs')->name('jobs.')->group(function () {
     })->name('create');
 
     Route::post('', function () {
-        // validation...
+        $validated = request()->validate([
+            'title' => ['required', 'string', 'min:3', 'max:255'],
+            'salary' => ['required', 'numeric', 'min:0'],
+        ]);
 
         Job::create([
             'title' => request('title'),
