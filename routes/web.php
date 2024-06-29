@@ -22,10 +22,7 @@ Route::prefix('jobs')->name('jobs.')->group(function () {
     })->name('create');
 
     Route::post('', function () {
-        $validated = request()->validate([
-            'title' => ['required', 'string', 'min:3', 'max:255'],
-            'salary' => ['required', 'numeric', 'min:0'],
-        ]);
+        request()->validate(Job::RULES);
 
         Job::create([
             'title' => request('title'),
@@ -41,6 +38,28 @@ Route::prefix('jobs')->name('jobs.')->group(function () {
             'job' => $job,
         ]);
     })->name('show');
+
+    Route::get('{job}/edit', function (Job $job) {
+        return view('jobs.edit', [
+            'job' => $job,
+        ]);
+    })->name('edit');
+
+    Route::patch('{job}', function (Job $job) {
+        request()->validate(Job::RULES);
+        $job->update([
+            'title' => request('title'),
+            'salary' => request('salary'),
+        ]);
+
+        return redirect()->route('jobs.show', $job);
+    })->name('update');
+
+    Route::delete('{job}', function (Job $job) {
+        $job->delete();
+
+        return redirect()->route('jobs.index');
+    })->name('destroy');
 });
 
 Route::get('/contact', fn() => view('contact'))->name('contact');

@@ -120,8 +120,11 @@
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $title }}</h1>
 
             @if($showCreateJob)
-                <a class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                   href="{{ route('jobs.create') }}">Create Job</a>
+                <x-button-link
+                    color="primary"
+                    href="{{ route('jobs.create') }}">
+                    Create Job
+                </x-button-link>
             @endif
         </div>
     </header>

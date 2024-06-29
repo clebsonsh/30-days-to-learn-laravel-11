@@ -12,6 +12,11 @@ class Job extends Model
 {
     use HasFactory;
 
+    const RULES = [
+        'title' => ['required', 'string', 'min:3', 'max:255'],
+        'salary' => ['required', 'numeric', 'min:0'],
+    ];
+
     protected $table = 'job_listings';
 
     protected $fillable = [
