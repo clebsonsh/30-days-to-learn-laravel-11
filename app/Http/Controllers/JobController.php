@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Job;
+use Illuminate\Http\Request;
+
+class JobController extends Controller
+{
+    public function index()
+    {
+        $jobs = Job::query()
+            ->with('employer')
+            ->latest()
+            ->paginate();
+
+        return view('jobs.index', [
+            'jobs' => $jobs,
+        ]);
+    }
+
+    public function create()
+    {
+        return view('jobs.create');
+    }
+
+    public function store(Request $request)
+    {
+        request()->validate(Job::RULES);
+
+        Job::create([
+            'title' => request('title'),
+            'salary' => request('salary'),
+            'employer_id' => 1,
+        ]);
+
+        return redirect()->route('jobs.index');
+    }
+
+    public function show(Job $job)
+    {
+        return view('jobs.show', [
+            'job' => $job,
+        ]);
+    }
+
+    public function edit(Job $job)
+    {
+        return view('jobs.edit', [
+            'job' => $job,
+        ]);
+    }
+
+    public function update(Request $request, Job $job)
+    {
+        request()->validate(Job::RULES);
+
+        $job->update([
+            'title' => request('title'),
+            'salary' => request('salary'),
+        ]);
+
+        return redirect()->route('jobs.show', $job);
+    }
+
+    public function destroy(Job $job)
+    {
+        $job->delete();
+
+        return redirect()->route('jobs.index');
+    }
+}
